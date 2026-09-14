@@ -1,0 +1,15 @@
+.header {
+  display: flex;
+  position: absolute;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+  justify-content: center;
+  width: 100%;
+  padding: 10px 0;
+
+  .container {
+    width: 97%;
+    display: flex;
+    justify-content: space-between;
+  }
+}

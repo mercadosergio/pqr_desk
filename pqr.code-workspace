@@ -1,0 +1,32 @@
+{
+    "folders": [
+        {
+            "name": "backend",
+            "path": "api"
+        },
+        {
+            "name": "frontend",
+            "path": "frontend"
+        },
+        {
+            "name": "root",
+            "path": "."
+        },
+    ],
+    "settings": {
+        "files.exclude": {
+            "**/.git": true,
+            "**/.svn": true,
+            "**/.hg": true,
+            "**/.DS_Store": true,
+            "**/Thumbs.db": true,
+            "**/flutter/ephemeral": true,
+            "**/Flutter/ephemeral": true,
+            "**/.symlinks": true,
+            "**/.plugin_symlinks": true,
+            "api": true,
+            "frontend": true,
+            "**/.vscode": true,
+        }
+    }
+}
