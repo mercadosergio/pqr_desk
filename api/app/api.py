@@ -6,4 +6,4 @@ from .serializers import PqrListSerializer
 class PqrViewSet(viewsets.ModelViewSet):
     queryset = Pqr.objects.all()
     permission_classes = [permissions.AllowAny]
-    serializer_class = PqrSerializer
+    serializer_class = PqrListSerializer

@@ -5,7 +5,7 @@ from .models import Client, Comment, Pqr, User
 class ClientSerializer(serializers.ModelSerializer):
     class Meta:
         model = Client
-        fields = ("name", "last_name", "dni", "email", "phone")
+        fields = ("id", "name", "last_name", "dni", "email", "phone")
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -23,12 +23,16 @@ class CommentSerializer(serializers.ModelSerializer):
         read_only_fields = ("id", "pqr", "registered_at", "user")
 
 
-class PqrListSerializer(serializers.ModelSerializer):
+class PqrSerializer(serializers.ModelSerializer):
     client = ClientSerializer(read_only=True)
+    client_id = serializers.PrimaryKeyRelatedField(
+        source="client", queryset=Client.objects.all(), write_only=True
+    )
+    comments = CommentSerializer(many=True, read_only=True)
 
     class Meta:
         model = Pqr
-        fields = (
+        fields = [
             "id",
             "type",
             "title",
@@ -37,16 +41,8 @@ class PqrListSerializer(serializers.ModelSerializer):
             "status",
             "channel",
             "client",
+            "client_id",
+            "comments",
             "created_at",
             "updated_at",
-        )
-
-
-class PqrDetailSerializer(serializers.ModelSerializer):
-    client = ClientSerializer(read_only=True)
-    comments = CommentSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = Pqr
-        fields = "__all__"
-        read_only_fields = ("id", "status", "created_at", "updated_at")
+        ]
