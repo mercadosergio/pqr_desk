@@ -1,6 +1,11 @@
 from django.urls import include, path
 from rest_framework import routers
 from .views import PqrView, ClientView, CommentView, UserView
+from drf_spectacular.views import (
+    SpectacularAPIView,
+    SpectacularRedocView,
+    SpectacularSwaggerView,
+)
 
 router = routers.DefaultRouter()
 
@@ -16,5 +21,16 @@ urlpatterns = [
     path(
         "pqr/<int:id>/seguimiento",
         CommentView.as_view({"get": "get_comments_by_pqr", "post": "add_comment"}),
+    ),
+    path("schema/", SpectacularAPIView.as_view(), name="schema"),
+    path(
+        "schema/swagger-ui/",
+        SpectacularSwaggerView.as_view(url_name="schema"),
+        name="swagger-ui",
+    ),
+    path(
+        "schema/redoc/",
+        SpectacularRedocView.as_view(url_name="schema"),
+        name="redoc",
     ),
 ]
