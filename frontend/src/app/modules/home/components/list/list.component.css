@@ -1,0 +1,7 @@
+.pqr_layout {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 70%;
+  margin: auto;
+}

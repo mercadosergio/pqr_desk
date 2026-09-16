@@ -1,1 +1,8 @@
-<p>list works!</p>
+@let pqrs = rxPqrs.value();
+@let users = rxUsers.value();
+
+<div class="pqr_layout">
+  @for (item of pqrs; track $index) {
+    <app-pqr-card [agents]="users ?? []" [pqr]="item"></app-pqr-card>
+  }
+</div>

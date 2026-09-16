@@ -1,0 +1,12 @@
+.page_layout {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+
+  .main_content {
+    margin: 56px 0;
+    height: 100%;
+    background-color: #f4f9ff;
+    padding: 14px;
+  }
+}

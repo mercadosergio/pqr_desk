@@ -1,0 +1,41 @@
+@let pqrData = pqr();
+
+<article class="pqr_card">
+  <div class="pqr_content">
+    <div class="pqr_head">
+      <h3>{{ pqrData.title }} #{{ pqrData.id }}</h3>
+    </div>
+
+    <div class="pqr_info">
+      <p>{{ `${pqrData.client.name} ${pqrData.client.last_name}` }}</p>
+      <p>{{ pqrData.created_at | timeDistance }}</p>
+    </div>
+  </div>
+  <div class="pqr_actions">
+    <div class="priority_action">
+      <label>Prioridad:</label>
+      <span
+        class="priority_indicator"
+        [style.background-color]="getPriorityColor(getCurrentPriority())"
+        aria-hidden="true"
+      ></span>
+      <select [value]="getCurrentPriority()" (change)="onPriorityChange($event)">
+        @for (item of priorities; track $index) {
+          <option [value]="item.value">
+            {{ item.label }}
+          </option>
+        }
+      </select>
+    </div>
+    <div class="priority_action">
+      <label>Estado:</label>
+      <select (change)="changeStatus($event)">
+        @for (item of statuses; track $index) {
+          <option [value]="item.value" [selected]="item.value === pqrData.status">
+            {{ item.label }}
+          </option>
+        }
+      </select>
+    </div>
+  </div>
+</article>
