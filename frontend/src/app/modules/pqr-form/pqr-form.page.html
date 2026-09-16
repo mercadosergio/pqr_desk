@@ -1,0 +1,66 @@
+<section class="form_page">
+  <div class="form_intro">
+    <p class="form_eyebrow">Nueva solicitud</p>
+    <h1>Registrar PQR</h1>
+    <p>Completa la información para crear una nueva petición, queja o reclamo.</p>
+  </div>
+
+  <form class="pqr_form" [formGroup]="pqrForm" (ngSubmit)="createPqr()">
+    <div class="form_field form_field_full">
+      <label for="title">Asunto:</label>
+      <input id="title" type="text" class="input_control" formControlName="title" />
+    </div>
+    <div class="form_field form_field_full">
+      <label for="description">Descripción:</label>
+      <textarea id="description" formControlName="description"></textarea>
+    </div>
+    <div class="form_field">
+      <label for="category">Categoría:</label>
+      <input
+        id="category"
+        type="text"
+        class="input_control"
+        formControlName="category"
+        autocomplete="off"
+      />
+    </div>
+
+    <div class="form_field">
+      <label for="type">Tipo:</label>
+      <select id="type" formControlName="type">
+        @for (item of types; track item.value) {
+          <option [value]="item.value">{{ item.label }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="form_field">
+      <label for="priority">Prioridad:</label>
+      <select id="priority" formControlName="priority">
+        @for (item of priorities; track item.value) {
+          <option [value]="item.value">{{ item.label }}</option>
+        }
+      </select>
+    </div>
+    <div class="form_field">
+      <label for="status">Estado:</label>
+      <select id="status" formControlName="status">
+        @for (item of statuses; track item.value) {
+          <option [value]="item.value">{{ item.label }}</option>
+        }
+      </select>
+    </div>
+    <div class="form_field">
+      <label for="channel">Canal:</label>
+      <select id="channel" formControlName="channel">
+        @for (item of channels; track item.value) {
+          <option [value]="item.value">{{ item.label }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="form_actions form_field_full">
+      <button class="submit_button" type="submit">Crear PQR</button>
+    </div>
+  </form>
+</section>

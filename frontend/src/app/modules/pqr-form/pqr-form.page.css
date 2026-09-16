@@ -1,0 +1,152 @@
+.form_page {
+  width: min(100% - 32px, 820px);
+  margin: 48px auto;
+  padding: 36px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
+}
+
+.form_intro {
+  margin-bottom: 28px;
+}
+
+.form_eyebrow {
+  margin-bottom: 8px;
+  color: #0f766e;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.form_intro h1 {
+  color: #172033;
+  font-size: clamp(1.7rem, 4vw, 2.2rem);
+  line-height: 1.1;
+}
+
+.form_intro > p:last-child {
+  max-width: 560px;
+  margin-top: 10px;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+.pqr_form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.form_field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form_field_full {
+  grid-column: 1 / -1;
+}
+
+.form_actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 4px;
+  padding-top: 20px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.submit_button {
+  min-width: 140px;
+  min-height: 44px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 8px;
+  background: #0f766e;
+  color: #ffffff;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  transition:
+    background 160ms ease,
+    transform 160ms ease;
+}
+
+.submit_button:hover {
+  background: #0b5f59;
+  transform: translateY(-1px);
+}
+
+.submit_button:focus-visible {
+  outline: 3px solid rgba(15, 118, 110, 0.25);
+  outline-offset: 2px;
+}
+
+.form_field label {
+  color: #334155;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.form_field input,
+.form_field textarea,
+.form_field select {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #f8fafc;
+  color: #172033;
+  font: inherit;
+  outline: none;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    background 160ms ease;
+}
+
+.form_field input,
+.form_field select {
+  min-height: 44px;
+  padding: 0 12px;
+}
+
+.form_field textarea {
+  min-height: 132px;
+  padding: 12px;
+  resize: vertical;
+}
+
+.form_field input:focus,
+.form_field textarea:focus,
+.form_field select:focus {
+  border-color: #0f766e;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.14);
+}
+
+@media (max-width: 620px) {
+  .form_page {
+    width: min(100% - 20px, 820px);
+    margin: 20px auto;
+    padding: 24px 18px;
+  }
+
+  .pqr_form {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .form_field_full {
+    grid-column: auto;
+  }
+
+  .form_actions {
+    grid-column: auto;
+  }
+
+  .submit_button {
+    width: 100%;
+  }
+}

@@ -6,6 +6,10 @@ export const routes: Routes = [
     loadComponent: () => import('./modules/home/home.page'),
   },
   {
+    path: 'pqr/nuevo',
+    loadComponent: () => import('./modules/pqr-form/pqr-form.page'),
+  },
+  {
     path: 'pqr/:id',
     loadComponent: () => import('./modules/detail/detail.page'),
   },

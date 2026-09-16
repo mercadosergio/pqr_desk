@@ -46,7 +46,7 @@ export interface TypeControl {
   value: PqrType;
 }
 
-export const type: TypeControl[] = [
+export const types: TypeControl[] = [
   { label: 'Reclamo', value: 'claim' },
   { label: 'Queja', value: 'complaint' },
   { label: 'Petición', value: 'petition' },

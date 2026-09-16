@@ -25,14 +25,20 @@ export class PqrCardComponent {
   priorities: PriorityControl[] = priorities;
   statuses: StatusControl[] = statuses;
   selectedPriority = signal<PqrPriority | null>(null);
+  selectedStatus = signal<PqrStatus | null>(null);
 
   getCurrentPriority(): PqrPriority {
     return this.selectedPriority() ?? this.pqr().priority;
   }
 
+  getCurrentStatus(): PqrStatus {
+    return this.selectedStatus() ?? this.pqr().status;
+  }
+
   onPriorityChange(event: Event): void {
     const priority = (event.target as HTMLSelectElement).value as PqrPriority;
     this.selectedPriority.set(priority);
+    this.updatePqr();
   }
 
   getPriorityColor(priority: PqrPriority): string {
@@ -41,9 +47,21 @@ export class PqrCardComponent {
 
   changeStatus(event: Event) {
     const status = (event.target as HTMLSelectElement).value as PqrStatus;
-    this.pqrService.changeStatus(this.pqr().id, status).subscribe({
-      next: (data) => {},
-      error: () => {},
-    });
+    this.selectedStatus.set(status);
+    this.updatePqr();
+  }
+
+  updatePqr() {
+    this.pqrService
+      .changeStatus(this.pqr().id, {
+        status: this.getCurrentStatus(),
+        priority: this.getCurrentPriority(),
+      })
+      .subscribe({
+        next: (data) => {
+          console.log(data);
+        },
+        error: () => {},
+      });
   }
 }

@@ -1,17 +1,41 @@
 .pqr_card {
-  background-color: white;
+  position: relative;
   display: flex;
-  gap: 20px;
-  align-items: center;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-  padding: 28px 32px;
+  gap: 24px;
+  align-items: stretch;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+  padding: 22px 24px 22px 28px;
   justify-content: space-between;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+
+  &:hover {
+    border-color: #cbd5e1;
+    box-shadow: 0 14px 28px rgba(15, 23, 42, 0.1);
+    transform: translateY(-1px);
+  }
+
+  .pqr_accent {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 4px;
+    background: #0f766e;
+  }
 
   .pqr_content {
+    min-width: 0;
+    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 12px;
 
     .pqr_head {
       display: flex;
@@ -19,37 +43,157 @@
       gap: 10px;
     }
 
+    h3 {
+      overflow: hidden;
+      color: #172033;
+      font-size: 1.05rem;
+      font-weight: 700;
+      line-height: 1.35;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .pqr_type,
+    .pqr_channel {
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 9px;
+    }
+
+    .pqr_type {
+      background: #e0f2fe;
+      color: #0369a1;
+    }
+
+    .pqr_channel {
+      background: #f1f5f9;
+      color: #64748b;
+      text-transform: capitalize;
+    }
+
     .pqr_info {
       display: flex;
       align-items: center;
       gap: 10px;
+
+      .client_avatar {
+        display: grid;
+        flex: 0 0 28px;
+        width: 28px;
+        height: 28px;
+        place-items: center;
+        border-radius: 50%;
+        background: #ccfbf1;
+        color: #0f766e;
+        font-size: 0.68rem;
+        font-weight: 800;
+      }
+
+      .client_name,
+      .created_at {
+        color: #64748b;
+        font-size: 0.82rem;
+      }
+
+      .client_name {
+        font-weight: 600;
+      }
+
+      .info_separator {
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        background: #cbd5e1;
+      }
     }
   }
 
   .pqr_actions {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    flex: 0 0 190px;
+    align-self: center;
+    gap: 12px;
 
     .priority_action {
       display: flex;
-      align-items: center;
-      gap: 6px;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 5px;
+
+      label {
+        color: #94a3b8;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
     }
 
-    .priority_indicator {
-      width: 14px;
-      height: 14px;
-      /* flex: 0 0 8px; */
-      border-radius: 50%;
+    .select_control {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 36px;
+      padding: 0 10px;
+      border: 1px solid #e2e8f0;
+      border-radius: 7px;
+      background: #f8fafc;
+
+      .priority_indicator {
+        flex: 0 0 8px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+      }
     }
 
     select {
+      width: 100%;
       border: none;
       background: none;
+      color: #334155;
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 600;
       outline: none;
       cursor: pointer;
-      font-weight: 600;
     }
+  }
+}
+
+@media (max-width: 680px) {
+  .pqr_card {
+    flex-direction: column;
+    gap: 18px;
+    padding: 20px 18px 20px 22px;
+  }
+
+  .pqr_content h3 {
+    white-space: normal;
+  }
+
+  .pqr_actions {
+    width: 100%;
+    flex-basis: auto;
+    flex-direction: row;
+  }
+
+  .pqr_actions .priority_action {
+    flex: 1;
+  }
+}
+
+@media (max-width: 420px) {
+  .pqr_info {
+    flex-wrap: wrap;
+  }
+
+  .pqr_info .info_separator {
+    display: none;
+  }
+
+  .pqr_actions {
+    flex-direction: column;
   }
 }

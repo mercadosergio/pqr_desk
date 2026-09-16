@@ -1,3 +1,4 @@
+import { FormControl } from '@angular/forms';
 import { IClient } from './clients.interface';
 
 export type PqrType = 'petition' | 'complaint' | 'claim';
@@ -19,8 +20,23 @@ export interface IPqr {
   updated_at: string;
 }
 
-export interface ICreatePqrDto extends Omit<IPqr, 'created_at' | 'updated_at' | 'client'> {
-  clied_id: number;
+export interface ICreatePqrDto extends Omit<IPqr, 'id' | 'created_at' | 'updated_at' | 'client'> {
+  client_id: number;
+}
+
+export interface ChangeStatusDto {
+  status: PqrStatus;
+  priority: PqrPriority;
+}
+
+export interface IPqrForm {
+  type: FormControl<PqrType>;
+  title: FormControl<string>;
+  description: FormControl<string>;
+  category: FormControl<string>;
+  priority: FormControl<PqrPriority>;
+  status: FormControl<PqrStatus>;
+  channel: FormControl<PqrChannel>;
 }
 
 export interface PqrExpanded extends Omit<IPqr, 'client'> {

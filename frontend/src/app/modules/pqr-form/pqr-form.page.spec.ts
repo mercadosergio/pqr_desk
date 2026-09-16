@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormPage } from './form.page';
+import { PqrFormPage } from './pqr-form.page';
 
-describe('FormPage', () => {
-  let component: FormPage;
-  let fixture: ComponentFixture<FormPage>;
+describe('PqrFormPage', () => {
+  let component: PqrFormPage;
+  let fixture: ComponentFixture<PqrFormPage>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FormPage],
+      imports: [PqrFormPage],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(FormPage);
+    fixture = TestBed.createComponent(PqrFormPage);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

@@ -1,41 +1,61 @@
 @let pqrData = pqr();
 
 <article class="pqr_card">
+  <div class="pqr_accent" aria-hidden="true"></div>
   <div class="pqr_content">
     <div class="pqr_head">
-      <h3>{{ pqrData.title }} #{{ pqrData.id }}</h3>
+      <span class="pqr_type">PQR #{{ pqrData.id }}</span>
+      <span class="pqr_channel">{{ pqrData.channel }}</span>
     </div>
 
+    <h3>{{ pqrData.title }}</h3>
+
     <div class="pqr_info">
-      <p>{{ `${pqrData.client.name} ${pqrData.client.last_name}` }}</p>
-      <p>{{ pqrData.created_at | timeDistance }}</p>
+      <span class="client_avatar" aria-hidden="true">
+        {{ pqrData.client.name.charAt(0) }}{{ pqrData.client.last_name.charAt(0) }}
+      </span>
+      <span class="client_name">{{ `${pqrData.client.name} ${pqrData.client.last_name}` }}</span>
+      <span class="info_separator" aria-hidden="true"></span>
+      <span class="created_at">{{ pqrData.created_at | timeDistance }}</span>
     </div>
   </div>
   <div class="pqr_actions">
     <div class="priority_action">
-      <label>Prioridad:</label>
-      <span
-        class="priority_indicator"
-        [style.background-color]="getPriorityColor(getCurrentPriority())"
-        aria-hidden="true"
-      ></span>
-      <select [value]="getCurrentPriority()" (change)="onPriorityChange($event)">
-        @for (item of priorities; track $index) {
-          <option [value]="item.value">
-            {{ item.label }}
-          </option>
-        }
-      </select>
+      <label for="priority-{{ pqrData.id }}">Prioridad</label>
+      <div class="select_control">
+        <span
+          class="priority_indicator"
+          [style.background-color]="getPriorityColor(getCurrentPriority())"
+          aria-hidden="true"
+        ></span>
+        <select
+          id="priority-{{ pqrData.id }}"
+          [value]="getCurrentPriority()"
+          (change)="onPriorityChange($event)"
+        >
+          @for (item of priorities; track $index) {
+            <option [value]="item.value" [selected]="item.value === pqrData.priority">
+              {{ item.label }}
+            </option>
+          }
+        </select>
+      </div>
     </div>
     <div class="priority_action">
-      <label>Estado:</label>
-      <select (change)="changeStatus($event)">
-        @for (item of statuses; track $index) {
-          <option [value]="item.value" [selected]="item.value === pqrData.status">
-            {{ item.label }}
-          </option>
-        }
-      </select>
+      <label for="status-{{ pqrData.id }}">Estado</label>
+      <div class="select_control">
+        <select
+          id="status-{{ pqrData.id }}"
+          [value]="getCurrentStatus()"
+          (change)="changeStatus($event)"
+        >
+          @for (item of statuses; track $index) {
+            <option [value]="item.value" [selected]="item.value === pqrData.status">
+              {{ item.label }}
+            </option>
+          }
+        </select>
+      </div>
     </div>
   </div>
 </article>
