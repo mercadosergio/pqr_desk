@@ -57,6 +57,14 @@ class PqrView(viewsets.ModelViewSet):
 
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
+
+        filters = {
+            field: request.query_params[field]
+            for field in ("type", "priority", "status")
+            if request.query_params.get(field)
+        }
+        queryset = queryset.filter(**filters)
+
         serializer = self.get_serializer(queryset, many=True)
 
         return Response(serializer.data)
