@@ -15,12 +15,6 @@
     box-shadow 160ms ease,
     transform 160ms ease;
 
-  &:hover {
-    border-color: #cbd5e1;
-    box-shadow: 0 14px 28px rgba(15, 23, 42, 0.1);
-    transform: translateY(-1px);
-  }
-
   .pqr_accent {
     position: absolute;
     top: 0;

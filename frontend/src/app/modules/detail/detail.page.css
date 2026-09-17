@@ -2,59 +2,90 @@
   width: min(100% - 40px, 1240px);
   margin: 32px auto 56px;
   color: #172033;
+
+  .detail_header,
+  .status_bar,
+  .conversation_panel,
+  .side_card {
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.06);
+  }
+
+  .detail_header {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 26px 30px;
+    border-radius: 14px 14px 0 0;
+
+    .back_link {
+      display: inline-block;
+      margin-bottom: 18px;
+      color: #0f766e;
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    .pqr_content {
+      display: flex;
+      flex-direction: column;
+      align-items: baseline;
+      gap: 12px;
+
+      .title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        .fa-envelope {
+          font-size: 28px;
+        }
+
+        h1 {
+          font-size: clamp(1.35rem, 3vw, 1.85rem);
+          line-height: 1.2;
+        }
+      }
+    }
+
+    .ticket_meta {
+      margin-top: 10px;
+      color: #64748b;
+      font-size: 0.84rem;
+    }
+
+    .pqr_body {
+      background-color: rgb(232, 241, 253);
+      border-radius: 5px;
+      padding: 28px;
+      border: 1px solid #80b8fc;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+
+      .p_info {
+        display: flex;
+        gap: 14px;
+        border-bottom: 1px solid #e2e8f0;
+      }
+
+      .p_description {
+        font-size: 16px;
+        font-weight: 400;
+      }
+    }
+  }
 }
 
-.detail_header,
-.status_bar,
-.conversation_panel,
-.side_card {
-  border: 1px solid #e2e8f0;
-  background: #ffffff;
-  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.06);
-}
-
-.detail_header {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 24px;
-  padding: 26px 30px;
-  border-radius: 14px 14px 0 0;
-}
-
-.back_link {
-  display: inline-block;
-  margin-bottom: 18px;
-  color: #0f766e;
-  font-size: 0.84rem;
-  font-weight: 700;
-}
-
-.ticket_heading {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-}
-
-.ticket_heading h1 {
-  max-width: 760px;
-  font-size: clamp(1.35rem, 3vw, 1.85rem);
-  line-height: 1.2;
-}
-
-.ticket_number,
+.pqr_number,
 .panel_kicker {
   color: #64748b;
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-}
-
-.ticket_meta {
-  margin-top: 10px;
-  color: #64748b;
-  font-size: 0.84rem;
 }
 
 .header_actions,
@@ -409,7 +440,7 @@ dd {
     padding: 22px 18px;
   }
 
-  .ticket_heading {
+  .pqr_content {
     align-items: flex-start;
     flex-direction: column;
     gap: 6px;

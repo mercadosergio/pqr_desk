@@ -1,144 +1,168 @@
-<main class="detail_page">
-  <header class="detail_header">
-    <div class="header_left">
+@if (rxPqr.hasValue()) {
+  @let pqr = rxPqr.value();
+  <div class="detail_page">
+    <div class="detail_header">
       <a class="back_link" routerLink="/">&larr; Volver a solicitudes</a>
-      <div class="ticket_heading">
-        <span class="ticket_number">PQR-{{ ticket.id }}</span>
-        <h1>{{ ticket.title }}</h1>
-      </div>
-      <p class="ticket_meta">Creada {{ ticket.createdAt }} · Actualizada {{ ticket.updatedAt }}</p>
-    </div>
-    <div class="header_actions">
-      <button class="button button_secondary" type="button">Asignar</button>
-      <button class="button button_primary" type="button">Responder</button>
-    </div>
-  </header>
 
-  <div class="status_bar">
-    <div class="status_group">
-      <span class="status_dot" aria-hidden="true"></span>
-      <span class="status_label">Estado</span>
-      <select [value]="ticket.status" aria-label="Estado de la solicitud">
-        @for (status of statusOptions; track status.value) {
-          <option [value]="status.value">{{ status.label }}</option>
-        }
-      </select>
-    </div>
-    <span class="status_hint">Última actividad hace 18 minutos</span>
-  </div>
-
-  <div class="detail_layout">
-    <section class="conversation_panel" aria-labelledby="conversation-title">
-      <div class="panel_heading">
-        <div>
-          <p class="panel_kicker">Conversación</p>
-          <h2 id="conversation-title">Seguimiento de la solicitud</h2>
+      <div class="pqr_content">
+        <span class="pqr_number">Radicado #{{ pqr.id }}</span>
+        <div class="title">
+          <fa-icon [icon]="faEnvelope" class="fa-envelope"></fa-icon>
+          <h1>{{ pqr.title }}</h1>
         </div>
-        <span class="message_count">2 mensajes</span>
       </div>
 
-      <article class="message message_customer">
-        <div class="avatar avatar_customer">ML</div>
-        <div class="message_body">
-          <div class="message_header">
-            <strong>{{ ticket.client.name }}</strong>
-            <span>{{ ticket.createdAt }}</span>
+      <div class="pqr_body">
+        <article class="p_info">
+          <div class="avatar avatar_customer">
+            {{ pqr.client.name.charAt(0) }}{{ pqr.client.last_name.charAt(0) }}
           </div>
-          <p>{{ ticket.description }}</p>
-        </div>
-      </article>
-
-      <article class="message message_agent">
-        <div class="avatar avatar_agent">AC</div>
-        <div class="message_body">
-          <div class="message_header">
-            <strong>Andrea Cárdenas · Soporte</strong>
-            <span>Hoy, 10:15 a. m.</span>
+          <div class="message_body">
+            <div class="message_header">
+              <strong>{{ pqr.client.name }}</strong>
+              <span>{{ pqr.created_at | timeDistance }}</span>
+            </div>
           </div>
+        </article>
+        <div class="p_description">
           <p>
-            Hola, Mariana. Ya revisamos tu cuenta y estamos validando el documento con el equipo de
-            facturación. Te confirmaremos apenas esté disponible.
+            {{ pqr.description }}
           </p>
         </div>
-      </article>
+      </div>
 
-      <form class="reply_box">
-        <label for="reply">Responder a {{ ticket.client.name }}</label>
-        <textarea id="reply" placeholder="Escribe una respuesta..."></textarea>
-        <div class="reply_footer">
-          <span class="reply_note">La respuesta se enviará por email</span>
-          <button class="button button_primary" type="submit">Enviar respuesta</button>
-        </div>
-      </form>
-    </section>
+      <p class="ticket_meta">Creada {{ pqr.created_at }} · Actualizada {{ pqr.updated_at }}</p>
+    </div>
 
-    <aside class="sidebar">
-      <section class="side_card client_card">
-        <div class="side_heading">
-          <h2>Cliente</h2>
-          <button class="icon_button" type="button" aria-label="Más opciones del cliente">
-            ...
-          </button>
+    <div class="status_bar">
+      <div class="status_group">
+        <span class="status_dot" aria-hidden="true"></span>
+        <span class="status_label">Estado</span>
+        <select [value]="pqr.status" aria-label="Estado de la solicitud">
+          @for (status of statusOptions; track status.value) {
+            <option [value]="status.value">{{ status.label }}</option>
+          }
+        </select>
+      </div>
+      <span class="status_hint">Última actividad hace 18 minutos</span>
+    </div>
+
+    <div class="detail_layout">
+      <section class="conversation_panel" aria-labelledby="conversation-title">
+        <div class="panel_heading">
+          <div>
+            <p class="panel_kicker">Conversación</p>
+            <h2 id="conversation-title">Seguimiento de la solicitud</h2>
+          </div>
+          <span class="message_count">2 mensajes</span>
         </div>
-        <div class="client_identity">
-          <div class="avatar avatar_large">ML</div>
-          <div>
-            <strong>{{ ticket.client.name }}</strong>
-            <span>Cliente desde 2024</span>
+
+        @for (item of pqr.comments; track $index) {
+          <article class="message message_customer">
+            <div class="avatar avatar_customer">
+              {{ pqr.client.name.charAt(0) }}{{ pqr.client.last_name.charAt(0) }}
+            </div>
+            <div class="message_body">
+              <div class="message_header">
+                <strong>{{ pqr.client.name }}</strong>
+                <span>{{ item.registered_at | timeDistance }}</span>
+              </div>
+              <p>{{ item.description }}</p>
+            </div>
+          </article>
+        }
+
+        <!-- <article class="message message_agent">
+          <div class="avatar avatar_agent">AC</div>
+          <div class="message_body">
+            <div class="message_header">
+              <strong>Andrea Cárdenas · Soporte</strong>
+              <span>Hoy, 10:15 a. m.</span>
+            </div>
+            <p>
+              Hola, Maria. Ya revisamos tu cuenta y estamos validando el documento con el equipo de
+              facturación. Te confirmaremos apenas esté disponible.
+            </p>
           </div>
-        </div>
-        <dl class="contact_list">
-          <div>
-            <dt>Email</dt>
-            <dd>{{ ticket.client.email }}</dd>
+        </article> -->
+
+        <form class="reply_box">
+          <label for="reply">Responder a {{ pqr.client.name }}</label>
+          <textarea id="reply" placeholder="Escribe una respuesta..."></textarea>
+          <div class="reply_footer">
+            <button class="button button_primary" type="submit">Enviar respuesta</button>
           </div>
-          <div>
-            <dt>Teléfono</dt>
-            <dd>{{ ticket.client.phone }}</dd>
-          </div>
-          <div>
-            <dt>Documento</dt>
-            <dd>{{ ticket.client.dni }}</dd>
-          </div>
-        </dl>
+        </form>
       </section>
 
-      <section class="side_card">
-        <div class="side_heading">
-          <h2>Detalles</h2>
-          <button class="edit_button" type="button">Editar</button>
-        </div>
-        <dl class="details_list">
-          <div>
-            <dt>Prioridad</dt>
-            <dd><span class="priority_badge priority_high">Alta</span></dd>
+      <aside class="sidebar">
+        <section class="side_card client_card">
+          <div class="side_heading">
+            <h2>Cliente</h2>
+            <button class="icon_button" type="button" aria-label="Más opciones del cliente">
+              ...
+            </button>
           </div>
-          <div>
-            <dt>Categoría</dt>
-            <dd>{{ ticket.category }}</dd>
+          <div class="client_identity">
+            <div class="avatar avatar_large">ML</div>
+            <div>
+              <strong>{{ pqr.client.name }}</strong>
+              <span>Cliente desde 2024</span>
+            </div>
           </div>
-          <div>
-            <dt>Canal</dt>
-            <dd>{{ ticket.channel }}</dd>
-          </div>
-          <div>
-            <dt>Responsable</dt>
-            <dd>Andrea Cárdenas</dd>
-          </div>
-        </dl>
-      </section>
+          <dl class="contact_list">
+            <div>
+              <dt>Email</dt>
+              <dd>{{ pqr.client.email }}</dd>
+            </div>
+            <div>
+              <dt>Teléfono</dt>
+              <dd>{{ pqr.client.phone }}</dd>
+            </div>
+            <div>
+              <dt>Documento</dt>
+              <dd>{{ pqr.client.dni }}</dd>
+            </div>
+          </dl>
+        </section>
 
-      <section class="side_card activity_card">
-        <div class="side_heading"><h2>Actividad</h2></div>
-        <div class="activity_item">
-          <span class="activity_marker"></span>
-          <p><strong>Andrea</strong> asignó esta solicitud<small>Hace 1 hora</small></p>
-        </div>
-        <div class="activity_item">
-          <span class="activity_marker"></span>
-          <p><strong>Sistema</strong> creó la solicitud<small>Hoy, 9:42 a. m.</small></p>
-        </div>
-      </section>
-    </aside>
+        <section class="side_card">
+          <div class="side_heading">
+            <h2>Detalles</h2>
+            <button class="edit_button" type="button">Editar</button>
+          </div>
+          <dl class="details_list">
+            <div>
+              <dt>Prioridad</dt>
+              <dd><span class="priority_badge priority_high">Alta</span></dd>
+            </div>
+            <div>
+              <dt>Categoría</dt>
+              <dd>{{ pqr.category }}</dd>
+            </div>
+            <div>
+              <dt>Canal</dt>
+              <dd>{{ pqr.channel }}</dd>
+            </div>
+            <div>
+              <dt>Responsable</dt>
+              <dd>Andrea Cárdenas</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="side_card activity_card">
+          <div class="side_heading"><h2>Actividad</h2></div>
+          <div class="activity_item">
+            <span class="activity_marker"></span>
+            <p><strong>Andrea</strong> asignó esta solicitud<small>Hace 1 hora</small></p>
+          </div>
+          <div class="activity_item">
+            <span class="activity_marker"></span>
+            <p><strong>Sistema</strong> creó la solicitud<small>Hoy, 9:42 a. m.</small></p>
+          </div>
+        </section>
+      </aside>
+    </div>
   </div>
-</main>
+}

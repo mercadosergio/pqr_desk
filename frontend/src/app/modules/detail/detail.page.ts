@@ -1,14 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { PqrPriority, PqrStatus } from '../../shared/models/interfaces/pqr.interface';
+import { PqrService } from '../../core/services/pqr.service';
+import { rxResource } from '@angular/core/rxjs-interop';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
+import { TimeDistancePipe } from '../../core/pipes/time-distance-pipe';
 
 @Component({
-  imports: [RouterLink],
+  imports: [RouterLink, FontAwesomeModule, TimeDistancePipe],
   selector: 'app-detail',
   styleUrl: './detail.page.css',
   templateUrl: './detail.page.html',
 })
 export default class DetailPage {
+  faEnvelope = faEnvelope;
+  id = input.required<number>();
+
   ticket = {
     id: 1048,
     title: 'No puedo acceder a mi factura de abril',
@@ -34,4 +42,11 @@ export default class DetailPage {
     { label: 'Resuelta', value: 'resolved' },
     { label: 'Cerrada', value: 'closed' },
   ];
+
+  private pqrService = inject(PqrService);
+
+  rxPqr = rxResource({
+    params: () => this.id(),
+    stream: ({ params }) => this.pqrService.getOnePqr(params),
+  });
 }

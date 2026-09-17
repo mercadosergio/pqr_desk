@@ -4,11 +4,12 @@
   <div class="pqr_accent" aria-hidden="true"></div>
   <div class="pqr_content">
     <div class="pqr_head">
-      <span class="pqr_type">PQR #{{ pqrData.id }}</span>
+      <span class="pqr_type">Radicado #{{ pqrData.id }}</span>
       <span class="pqr_channel">{{ pqrData.channel }}</span>
     </div>
-
-    <h3>{{ pqrData.title }}</h3>
+    <a [routerLink]="['/pqr', pqrData.id]">
+      <h3>{{ pqrData.title }}</h3>
+    </a>
 
     <div class="pqr_info">
       <span class="client_avatar" aria-hidden="true">

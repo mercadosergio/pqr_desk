@@ -1,14 +1,10 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { PqrService } from '../../../../core/services/pqr.service';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { PqrCardComponent } from '../pqr-card/pqr-card.component';
 import { UsersService } from '../../../../core/services/users.service';
 import { priorities, statuses, types } from '../../../../core/mapping-objects';
-import {
-  PqrPriority,
-  PqrStatus,
-  PqrType,
-} from '../../../../shared/models/interfaces/pqr.interface';
+import { PqrParams } from '../../../../shared/models/interfaces/pqr.interface';
 
 @Component({
   imports: [PqrCardComponent],
@@ -23,40 +19,40 @@ export class ListComponent {
   types = types;
   priorities = priorities;
   statuses = statuses;
-  selectedType = signal<PqrType | ''>('');
-  selectedPriority = signal<PqrPriority | ''>('');
-  selectedStatus = signal<PqrStatus | ''>('');
+
+  filters = signal<PqrParams>({
+    priority: '',
+    status: '',
+    type: '',
+  });
+
+  appliedFilters = signal<PqrParams>({
+    priority: '',
+    status: '',
+    type: '',
+  });
 
   rxPqrs = rxResource({
-    stream: () =>
-      this.pqrService.getPqrs({
-        type: this.selectedType(),
-        priority: this.selectedPriority(),
-        status: this.selectedStatus(),
-      }),
+    params: () => this.appliedFilters(),
+    stream: ({ params }) => this.pqrService.getPqrs(params),
   });
 
   rxUsers = rxResource({
     stream: () => this.usersService.getUsers(),
   });
 
-  filteredPqrs = computed(() => this.rxPqrs.value() ?? []);
+  // filteredPqrs = computed(() => this.rxPqrs.value() ?? []);
 
-  filterByType(event: Event): void {
-    this.selectedType.set((event.target as HTMLSelectElement).value as PqrType | '');
+  toggleFilter(event: Event, filter: keyof PqrParams) {
+    const value = (event.target as HTMLSelectElement).value;
+
+    this.filters.update((prev) => ({
+      ...prev,
+      [filter]: value,
+    }));
   }
 
-  filterByPriority(event: Event): void {
-    this.selectedPriority.set((event.target as HTMLSelectElement).value as PqrPriority | '');
-  }
-
-  filterByStatus(event: Event): void {
-    this.selectedStatus.set((event.target as HTMLSelectElement).value as PqrStatus | '');
-  }
-
-  clearFilters(): void {
-    this.selectedType.set('');
-    this.selectedPriority.set('');
-    this.selectedStatus.set('');
+  applyFilters() {
+    this.appliedFilters.set(this.filters());
   }
 }

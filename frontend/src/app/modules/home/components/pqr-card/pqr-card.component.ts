@@ -9,9 +9,10 @@ import {
 } from '../../../../core/mapping-objects';
 import { TimeDistancePipe } from '../../../../core/pipes/time-distance-pipe';
 import { PqrService } from '../../../../core/services/pqr.service';
+import { RouterLinkWithHref } from '@angular/router';
 
 @Component({
-  imports: [TimeDistancePipe],
+  imports: [TimeDistancePipe, RouterLinkWithHref],
   selector: 'app-pqr-card',
   styleUrl: './pqr-card.component.css',
   templateUrl: './pqr-card.component.html',

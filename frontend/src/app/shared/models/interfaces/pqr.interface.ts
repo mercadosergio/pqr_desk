@@ -1,5 +1,6 @@
 import { FormControl } from '@angular/forms';
 import { IClient } from './clients.interface';
+import { IComment } from './comments.interface';
 
 export type PqrType = 'petition' | 'complaint' | 'claim';
 export type PqrPriority = 'low' | 'medium' | 'high' | 'urgent';
@@ -16,11 +17,15 @@ export interface IPqr {
   status: PqrStatus;
   channel: PqrChannel;
   client: IClient;
+  comments: IComment[];
   created_at: string;
   updated_at: string;
 }
 
-export interface ICreatePqrDto extends Omit<IPqr, 'id' | 'created_at' | 'updated_at' | 'client'> {
+export interface ICreatePqrDto extends Omit<
+  IPqr,
+  'id' | 'created_at' | 'updated_at' | 'client' | 'comments'
+> {
   client_id: number;
 }
 
@@ -37,6 +42,12 @@ export interface IPqrForm {
   priority: FormControl<PqrPriority>;
   status: FormControl<PqrStatus>;
   channel: FormControl<PqrChannel>;
+}
+
+export interface PqrParams {
+  status?: PqrStatus | '';
+  priority?: PqrPriority | '';
+  type?: PqrType | '';
 }
 
 export interface PqrExpanded extends Omit<IPqr, 'client'> {
