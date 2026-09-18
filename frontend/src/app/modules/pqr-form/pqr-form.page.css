@@ -1,5 +1,11 @@
+:host {
+  display: flex;
+  flex: 1;
+  overflow: auto;
+}
+
 .form_page {
-  width: min(100% - 32px, 820px);
+  width: 70%;
   margin: 48px auto;
   padding: 36px;
   background: #ffffff;
