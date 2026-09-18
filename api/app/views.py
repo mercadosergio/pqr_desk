@@ -43,6 +43,9 @@ class CommentView(viewsets.ModelViewSet):
         pqr = get_object_or_404(Pqr, pk=kwargs["id"])
 
         comments = self.get_queryset().filter(pqr=pqr)
+        action_type = request.query_params.get("action_type")
+        if action_type:
+            comments = comments.filter(action_type=action_type)
 
         serializer = self.get_serializer(comments, many=True)
 

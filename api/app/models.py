@@ -19,6 +19,7 @@ class User(models.Model):
         AGENT = "agent", "Agente"
         SUPERVISOR = "supervisor", "Supervisor"
         ADMIN = "admin", "Admin"
+        CLIENT = "client", "Cliente"
 
     name = models.CharField(max_length=100)
     email = models.EmailField(unique=True)

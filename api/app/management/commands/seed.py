@@ -60,6 +60,19 @@ class Command(BaseCommand):
             client, _ = Client.objects.get_or_create(dni=data["dni"], defaults=data)
             clients[client.dni] = client
 
+            client_user, created = User.objects.get_or_create(
+                email=client.email,
+                defaults={
+                    "name": f"{client.name} {client.last_name}",
+                    "role": User.Role.CLIENT,
+                    "password_hash": make_password(client.dni),
+                },
+            )
+            if not created and not client_user.password_hash:
+                client_user.password_hash = make_password(client.dni)
+                client_user.save(update_fields=["password_hash"])
+            users[client_user.email] = client_user
+
         pqr_data = [
             {
                 "title": "Demora en la respuesta de una solicitud",
@@ -103,5 +116,33 @@ class Command(BaseCommand):
                     "user": users["carlos.supervisor@example.com"],
                 },
             )
+
+            client_user = users[pqr.client.email]
+            conversation = [
+                (
+                    client_user,
+                    "Hola, quisiera conocer el avance de mi solicitud.",
+                ),
+                (
+                    users["ana.agente@example.com"],
+                    "Hola. Estamos revisando tu caso y validando la información recibida.",
+                ),
+                (
+                    client_user,
+                    "Gracias. ¿Cuándo podría recibir una respuesta definitiva?",
+                ),
+                (
+                    users["ana.agente@example.com"],
+                    "Te confirmaremos la respuesta tan pronto termine la revisión.",
+                ),
+            ]
+
+            for user, description in conversation:
+                Comment.objects.get_or_create(
+                    pqr=pqr,
+                    user=user,
+                    description=description,
+                    defaults={"action_type": "message"},
+                )
 
         self.stdout.write(self.style.SUCCESS("Datos generados correctamente."))

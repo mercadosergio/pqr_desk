@@ -266,13 +266,6 @@
   font-size: 0.82rem;
 }
 
-.message {
-  display: flex;
-  gap: 14px;
-  padding: 24px 0;
-  border-bottom: 1px solid #e2e8f0;
-}
-
 .avatar {
   display: grid;
   flex: 0 0 38px;
@@ -292,27 +285,6 @@
 .avatar_agent {
   background: #ccfbf1;
   color: #0f766e;
-}
-
-.message_body {
-  min-width: 0;
-  flex: 1;
-}
-
-.message_header strong {
-  font-size: 0.9rem;
-}
-
-.message_header span {
-  color: #94a3b8;
-  font-size: 0.76rem;
-}
-
-.message_body p {
-  margin-top: 10px;
-  color: #475569;
-  font-size: 0.92rem;
-  line-height: 1.65;
 }
 
 .sidebar {

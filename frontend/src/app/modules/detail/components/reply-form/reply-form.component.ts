@@ -1,6 +1,6 @@
 import { Component, inject, input, output } from '@angular/core';
 import { IPqr } from '../../../../shared/models/interfaces/pqr.interface';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import {
   ICreateCommentDto,
   IFormComment,
@@ -30,8 +30,9 @@ export class ReplyFormComponent {
 
   initForm() {
     this.replyForm = this.fb.nonNullable.group({
-      description: [''],
-      action_type: ['email'],
+      description: ['', [Validators.required]],
+      action_type:
+        this.fb.nonNullable.control<IFormComment['action_type']['defaultValue']>('message'),
     });
   }
 
@@ -44,7 +45,7 @@ export class ReplyFormComponent {
     this.commentService.createComment(this.pqr().id, this.currentComent).subscribe({
       next: () => {
         this.toastService.show('Respuesta enviada correctamente.');
-        this.replyForm.reset({ action_type: 'email', description: '' });
+        this.replyForm.reset({ action_type: 'message', description: '' });
         this.reloadDetail.emit();
       },
       error: () => {

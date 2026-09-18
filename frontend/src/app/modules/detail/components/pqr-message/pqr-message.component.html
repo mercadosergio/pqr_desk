@@ -1,0 +1,17 @@
+@let comment = message();
+
+<article class="message message_customer">
+  <div class="avatar avatar_customer">
+    {{ comment.user.name.charAt(0) }}{{ comment.user.name.charAt(0) }}
+  </div>
+  <div class="message_body">
+    <div class="message_header">
+      <div>
+        <strong>{{ comment.user.name }}</strong>
+        <p>{{ comment.user.email }}</p>
+      </div>
+      <span>{{ comment.registered_at | timeDistance }}</span>
+    </div>
+    <p>{{ comment.description }}</p>
+  </div>
+</article>

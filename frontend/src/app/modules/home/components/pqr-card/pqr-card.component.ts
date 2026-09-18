@@ -58,7 +58,7 @@ export class PqrCardComponent {
 
   updatePqr() {
     this.pqrService
-      .changeStatus(this.pqr().id, {
+      .changeStatusWithComments(this.pqr().id, this.pqr(), {
         status: this.getCurrentStatus(),
         priority: this.getCurrentPriority(),
       })
