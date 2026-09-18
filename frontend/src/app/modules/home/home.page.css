@@ -1,0 +1,137 @@
+:host {
+  min-width: 0;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+}
+
+.list_head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 32px;
+  margin-bottom: 18px;
+
+  .legend {
+    margin-bottom: 5px;
+    color: #0f766e;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    color: #172033;
+    font-size: 1.55rem;
+  }
+
+  .result_count {
+    color: #64748b;
+    font-size: 0.82rem;
+  }
+}
+
+.page_layout {
+  display: flex;
+  gap: 20px;
+  height: 100%;
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  .pqr_list_layout {
+    flex: 1;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .loading_state {
+      margin: 0;
+      padding: 16px;
+      border-radius: 10px;
+      background: #ecfeff;
+      border: 1px solid #a5f3fc;
+      color: #115e59;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .empty_state {
+      padding: 32px 16px;
+      border: 1px dashed #cbd5e1;
+      border-radius: 10px;
+      color: #64748b;
+      text-align: center;
+    }
+  }
+
+  aside {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+    padding: 20px;
+    height: 100%;
+
+    .controls {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      .fields {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        span {
+          color: #64748b;
+          font-size: 0.72rem;
+          font-weight: 700;
+          text-transform: uppercase;
+        }
+
+        select {
+          min-height: 38px;
+          padding: 0 10px;
+          border: 1px solid #cbd5e1;
+          border-radius: 7px;
+          background: #f8fafc;
+          color: #334155;
+          font: inherit;
+          font-size: 0.82rem;
+          outline: none;
+
+          &:focus {
+            border-color: #0f766e;
+            box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.14);
+          }
+        }
+      }
+    }
+
+    .search_button {
+      min-height: 38px;
+      padding: 0 12px;
+      border-radius: 7px;
+      color: #ffffff;
+      background: #0f766e;
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 700;
+
+      &:disabled {
+        opacity: 0.7;
+        cursor: wait;
+      }
+    }
+  }
+}

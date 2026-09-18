@@ -1,14 +1,25 @@
 <header class="header">
-  <div class="container">
-    <img src="" alt="" />
-    <nav>
-      <ul>
-        <li>Inicio</li>
-        <li>Dashboard</li>
-      </ul>
+  <div class="header__container">
+    <a class="brand" routerLink="/" aria-label="Inicio">
+      <span class="brand__mark">PQR</span>
+      <span class="brand__text">Portal de soporte</span>
+    </a>
+
+    <nav class="nav" aria-label="Navegación principal">
+      <a
+        class="nav__link"
+        routerLink="/"
+        routerLinkActive="is-active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <fa-icon [icon]="homeIcon"></fa-icon>
+        <span>Inicio</span>
+      </a>
     </nav>
-    <div>
-      <a routerLink="/pqr/nuevo">+ Nuevo</a>
-    </div>
+
+    <a class="new-ticket" routerLink="/pqr/nuevo">
+      <fa-icon [icon]="newPqrIcon"></fa-icon>
+      <span>Nuevo</span>
+    </a>
   </div>
 </header>

@@ -1,54 +1,41 @@
 @if (rxPqr.hasValue()) {
   @let pqr = rxPqr.value();
   <div class="detail_page">
-    <div class="detail_header">
-      <a class="back_link" routerLink="/">&larr; Volver a solicitudes</a>
+    <div class="left_column">
+      <div class="detail_page_card detail_content">
+        <a class="back_link" routerLink="/">&larr; Volver a solicitudes</a>
 
-      <div class="pqr_content">
-        <span class="pqr_number">Radicado #{{ pqr.id }}</span>
-        <div class="title">
-          <fa-icon [icon]="faEnvelope" class="fa-envelope"></fa-icon>
-          <h1>{{ pqr.title }}</h1>
-        </div>
-      </div>
-
-      <div class="pqr_body">
-        <article class="p_info">
-          <div class="avatar avatar_customer">
-            {{ pqr.client.name.charAt(0) }}{{ pqr.client.last_name.charAt(0) }}
+        <div class="pqr_content">
+          <span class="pqr_number">Radicado #{{ pqr.id }}</span>
+          <div class="title">
+            <fa-icon [icon]="faEnvelope" class="fa-envelope"></fa-icon>
+            <h1>{{ pqr.title }}</h1>
           </div>
-          <div class="message_body">
-            <div class="message_header">
-              <strong>{{ pqr.client.name }}</strong>
-              <span>{{ pqr.created_at | timeDistance }}</span>
+        </div>
+
+        <div class="pqr_body">
+          <article class="p_info">
+            <div class="avatar avatar_customer">
+              {{ pqr.client.name.charAt(0) }}{{ pqr.client.last_name.charAt(0) }}
             </div>
+            <div class="message_body">
+              <div class="message_header">
+                <strong>{{ pqr.client.name }}</strong>
+                <span>{{ pqr.created_at | timeDistance }}</span>
+              </div>
+            </div>
+          </article>
+          <div class="p_description">
+            <p>
+              {{ pqr.description }}
+            </p>
           </div>
-        </article>
-        <div class="p_description">
-          <p>
-            {{ pqr.description }}
-          </p>
         </div>
+
+        <p class="ticket_meta">Creada {{ pqr.created_at }} · Actualizada {{ pqr.updated_at }}</p>
       </div>
 
-      <p class="ticket_meta">Creada {{ pqr.created_at }} · Actualizada {{ pqr.updated_at }}</p>
-    </div>
-
-    <div class="status_bar">
-      <div class="status_group">
-        <span class="status_dot" aria-hidden="true"></span>
-        <span class="status_label">Estado</span>
-        <select [value]="pqr.status" aria-label="Estado de la solicitud">
-          @for (status of statusOptions; track status.value) {
-            <option [value]="status.value">{{ status.label }}</option>
-          }
-        </select>
-      </div>
-      <span class="status_hint">Última actividad hace 18 minutos</span>
-    </div>
-
-    <div class="detail_layout">
-      <section class="conversation_panel" aria-labelledby="conversation-title">
+      <div class="detail_page_card conversation_panel" aria-labelledby="conversation-title">
         <div class="panel_heading">
           <div>
             <p class="panel_kicker">Conversación</p>
@@ -86,83 +73,79 @@
           </div>
         </article> -->
 
-        <form class="reply_box">
-          <label for="reply">Responder a {{ pqr.client.name }}</label>
-          <textarea id="reply" placeholder="Escribe una respuesta..."></textarea>
-          <div class="reply_footer">
-            <button class="button button_primary" type="submit">Enviar respuesta</button>
-          </div>
-        </form>
-      </section>
-
-      <aside class="sidebar">
-        <section class="side_card client_card">
-          <div class="side_heading">
-            <h2>Cliente</h2>
-            <button class="icon_button" type="button" aria-label="Más opciones del cliente">
-              ...
-            </button>
-          </div>
-          <div class="client_identity">
-            <div class="avatar avatar_large">ML</div>
-            <div>
-              <strong>{{ pqr.client.name }}</strong>
-              <span>Cliente desde 2024</span>
-            </div>
-          </div>
-          <dl class="contact_list">
-            <div>
-              <dt>Email</dt>
-              <dd>{{ pqr.client.email }}</dd>
-            </div>
-            <div>
-              <dt>Teléfono</dt>
-              <dd>{{ pqr.client.phone }}</dd>
-            </div>
-            <div>
-              <dt>Documento</dt>
-              <dd>{{ pqr.client.dni }}</dd>
-            </div>
-          </dl>
-        </section>
-
-        <section class="side_card">
-          <div class="side_heading">
-            <h2>Detalles</h2>
-            <button class="edit_button" type="button">Editar</button>
-          </div>
-          <dl class="details_list">
-            <div>
-              <dt>Prioridad</dt>
-              <dd><span class="priority_badge priority_high">Alta</span></dd>
-            </div>
-            <div>
-              <dt>Categoría</dt>
-              <dd>{{ pqr.category }}</dd>
-            </div>
-            <div>
-              <dt>Canal</dt>
-              <dd>{{ pqr.channel }}</dd>
-            </div>
-            <div>
-              <dt>Responsable</dt>
-              <dd>Andrea Cárdenas</dd>
-            </div>
-          </dl>
-        </section>
-
-        <section class="side_card activity_card">
-          <div class="side_heading"><h2>Actividad</h2></div>
-          <div class="activity_item">
-            <span class="activity_marker"></span>
-            <p><strong>Andrea</strong> asignó esta solicitud<small>Hace 1 hora</small></p>
-          </div>
-          <div class="activity_item">
-            <span class="activity_marker"></span>
-            <p><strong>Sistema</strong> creó la solicitud<small>Hoy, 9:42 a. m.</small></p>
-          </div>
-        </section>
-      </aside>
+        <app-reply-form [pqr]="pqr" (reloadDetail)="rxPqr.reload()"></app-reply-form>
+      </div>
     </div>
+    <aside class="right_column">
+      <div class="detail_page_card properties_controls">
+        <div class="fields">
+          <span>Prioridad</span>
+          <select (change)="toggleSelect($event, 'priority')">
+            <option value="">Todas</option>
+            @for (item of priorities; track item.value) {
+              <option [value]="item.value" [selected]="item.value === pqr.priority">
+                {{ item.label }}
+              </option>
+            }
+          </select>
+        </div>
+        <div class="fields">
+          <span>Estado</span>
+          <select (change)="toggleSelect($event, 'status')">
+            <option value="">Todos</option>
+            @for (item of statuses; track item.value) {
+              <option [value]="item.value" [selected]="item.value === pqr.status">
+                {{ item.label }}
+              </option>
+            }
+          </select>
+        </div>
+
+        <button
+          type="button"
+          class="update_button"
+          [disabled]="rxPqr.isLoading()"
+          (click)="updatePqr()"
+        >
+          {{ rxPqr.isLoading() ? 'Cargando...' : 'Actualizar' }}
+        </button>
+      </div>
+      <section class="side_card">
+        <div class="side_heading">
+          <h2>Detalles</h2>
+        </div>
+        <dl class="details_list">
+          <div>
+            <dt>Categoría</dt>
+            <dd>{{ pqr.category }}</dd>
+          </div>
+          <div>
+            <dt>Canal</dt>
+            <dd>{{ pqr.channel }}</dd>
+          </div>
+        </dl>
+      </section>
+      <div class="side_card client_card">
+        <div class="side_heading">
+          <h2>Cliente</h2>
+        </div>
+        <div class="client_identity">
+          <div class="avatar avatar_large">ML</div>
+          <div>
+            <strong>{{ pqr.client.name }}</strong>
+          </div>
+        </div>
+        <dl class="contact_list">
+          <div>
+            <dt>Email</dt>
+            <dd>{{ pqr.client.email }}</dd>
+          </div>
+          <div>
+            <dt>Teléfono</dt>
+            <dd>{{ pqr.client.phone }}</dd>
+          </div>
+        </dl>
+      </div>
+    </aside>
   </div>
 }

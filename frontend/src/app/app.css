@@ -1,12 +1,17 @@
-.page_layout {
+.view_layout {
   display: flex;
   flex-direction: column;
-  height: 100dvh;
+  height: 100vh;
+  overflow: hidden;
 
   .main_content {
-    margin: 56px 0;
-    height: 100%;
     background-color: #f4f9ff;
-    padding: 14px;
+    padding: 72px 18px 18px 18px;
+    flex: 1;
+    display: flex;
+    box-sizing: border-box;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
   }
 }

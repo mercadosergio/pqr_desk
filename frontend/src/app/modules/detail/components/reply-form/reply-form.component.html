@@ -1,0 +1,14 @@
+@let pqrData = pqr();
+
+<form class="reply_box" [formGroup]="replyForm">
+  <label for="reply">Responder a {{ pqrData.client.name }}</label>
+  <textarea
+    id="reply"
+    formControlName="description"
+    placeholder="Escribe una respuesta..."
+  ></textarea>
+  <input type="text" value="email" hidden formControlName="action_type" />
+  <div class="reply_footer" (click)="submit()">
+    <button class="button button_primary" type="submit">Enviar respuesta</button>
+  </div>
+</form>

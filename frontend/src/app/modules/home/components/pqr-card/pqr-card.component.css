@@ -1,19 +1,15 @@
 .pqr_card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
   position: relative;
   display: flex;
   gap: 24px;
   align-items: stretch;
   overflow: hidden;
-  border: 1px solid #e2e8f0;
   border-radius: 12px;
-  background: #ffffff;
   box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
   padding: 22px 24px 22px 28px;
   justify-content: space-between;
-  transition:
-    border-color 160ms ease,
-    box-shadow 160ms ease,
-    transform 160ms ease;
 
   .pqr_accent {
     position: absolute;
@@ -31,10 +27,29 @@
     flex-direction: column;
     gap: 12px;
 
-    .pqr_head {
+    .pqr_chips {
       display: flex;
       align-items: center;
       gap: 10px;
+
+      .pqr_type,
+      .pqr_channel {
+        border-radius: 999px;
+        font-size: 0.72rem;
+        font-weight: 700;
+        padding: 4px 9px;
+      }
+
+      .pqr_type {
+        background: #e0f2fe;
+        color: #0369a1;
+      }
+
+      .pqr_channel {
+        background: #f1f5f9;
+        color: #64748b;
+        text-transform: capitalize;
+      }
     }
 
     h3 {
@@ -45,25 +60,6 @@
       line-height: 1.35;
       text-overflow: ellipsis;
       white-space: nowrap;
-    }
-
-    .pqr_type,
-    .pqr_channel {
-      border-radius: 999px;
-      font-size: 0.72rem;
-      font-weight: 700;
-      padding: 4px 9px;
-    }
-
-    .pqr_type {
-      background: #e0f2fe;
-      color: #0369a1;
-    }
-
-    .pqr_channel {
-      background: #f1f5f9;
-      color: #64748b;
-      text-transform: capitalize;
     }
 
     .pqr_info {
@@ -105,11 +101,10 @@
 
   .pqr_actions {
     display: flex;
-    flex: 0 0 190px;
     align-self: center;
     gap: 12px;
 
-    .priority_action {
+    .field_control {
       display: flex;
       flex-direction: column;
       align-items: stretch;
@@ -130,9 +125,10 @@
       gap: 8px;
       min-height: 36px;
       padding: 0 10px;
-      border: 1px solid #e2e8f0;
       border-radius: 7px;
+      border: 1px solid #e2e8f0;
       background: #f8fafc;
+      min-width: 160px;
 
       .priority_indicator {
         flex: 0 0 8px;
@@ -173,7 +169,7 @@
     flex-direction: row;
   }
 
-  .pqr_actions .priority_action {
+  .pqr_actions .field_control {
     flex: 1;
   }
 }

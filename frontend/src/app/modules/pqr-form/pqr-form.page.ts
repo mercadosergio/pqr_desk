@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ICreatePqrDto, IPqrForm } from '../../shared/models/interfaces/pqr.interface';
 import { channels, priorities, statuses, types } from '../../core/mapping-objects';
 import { PqrService } from '../../core/services/pqr.service';
+import { ToastService } from '../../core/services/toast.service';
 
 @Component({
   imports: [ReactiveFormsModule],
@@ -13,6 +14,7 @@ import { PqrService } from '../../core/services/pqr.service';
 export default class PqrFormPage implements OnInit {
   private fb = inject(FormBuilder);
   private pqrService = inject(PqrService);
+  private toastService = inject(ToastService);
 
   pqrForm!: FormGroup<IPqrForm>;
   types = types;
@@ -33,15 +35,21 @@ export default class PqrFormPage implements OnInit {
   }
 
   createPqr() {
-    if (!this.pqrForm.invalid) {
-      this.pqrService.createPqr(this.currentPqr).subscribe({
-        next: (data) => {
-          this.pqrForm.reset();
-          alert(`PQR con radicado #${data.id} con exito`);
-        },
-        error: () => {},
-      });
+    if (this.pqrForm.invalid) {
+      this.pqrForm.markAllAsTouched();
+      this.toastService.show('Completa los campos requeridos.', 'warning');
+      return;
     }
+
+    this.pqrService.createPqr(this.currentPqr).subscribe({
+      next: (data) => {
+        this.pqrForm.reset();
+        this.toastService.show(`PQR #${data.id} creada correctamente.`);
+      },
+      error: () => {
+        this.toastService.show('No fue posible crear la PQR.', 'error');
+      },
+    });
   }
 
   get currentPqr(): ICreatePqrDto {

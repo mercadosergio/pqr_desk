@@ -1,3 +1,4 @@
+import { FormControl } from '@angular/forms';
 import { IPqr } from './pqr.interface';
 import { IUser } from './users.interface';
 
@@ -6,11 +7,16 @@ export interface IComment {
   description: string;
   action_type: string;
   registered_at: string;
-  pqr: number;
-  user: number | null;
+  pqr: IPqr;
+  user?: IUser;
 }
 
-export interface CommentExpanded extends Omit<IComment, 'pqr' | 'user'> {
-  pqr: IPqr;
-  user: IUser | null;
+export interface ICreateCommentDto {
+  description: string;
+  action_type: string;
+}
+
+export interface IFormComment {
+  description: FormControl<string>;
+  action_type: FormControl<string>;
 }

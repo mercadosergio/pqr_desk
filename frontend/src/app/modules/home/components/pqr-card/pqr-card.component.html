@@ -2,8 +2,9 @@
 
 <article class="pqr_card">
   <div class="pqr_accent" aria-hidden="true"></div>
+
   <div class="pqr_content">
-    <div class="pqr_head">
+    <div class="pqr_chips">
       <span class="pqr_type">Radicado #{{ pqrData.id }}</span>
       <span class="pqr_channel">{{ pqrData.channel }}</span>
     </div>
@@ -21,7 +22,7 @@
     </div>
   </div>
   <div class="pqr_actions">
-    <div class="priority_action">
+    <div class="field_control">
       <label for="priority-{{ pqrData.id }}">Prioridad</label>
       <div class="select_control">
         <span
@@ -42,7 +43,7 @@
         </select>
       </div>
     </div>
-    <div class="priority_action">
+    <div class="field_control">
       <label for="status-{{ pqrData.id }}">Estado</label>
       <div class="select_control">
         <select

@@ -1,10 +1,16 @@
 import { Component } from '@angular/core';
-import { RouterLinkWithHref } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faClipboardList, faHouse, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  imports: [RouterLinkWithHref],
+  imports: [RouterLink, RouterLinkActive, FontAwesomeModule],
   selector: 'app-header',
   styleUrl: './header.css',
   templateUrl: './header.html',
 })
-export class Header {}
+export class Header {
+  readonly homeIcon = faHouse;
+  readonly listIcon = faClipboardList;
+  readonly newPqrIcon = faPlus;
+}

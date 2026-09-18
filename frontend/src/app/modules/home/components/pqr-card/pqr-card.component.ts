@@ -1,4 +1,4 @@
-import { Component, inject, input, signal } from '@angular/core';
+import { Component, inject, input, output, signal } from '@angular/core';
 import { IPqr, PqrPriority, PqrStatus } from '../../../../shared/models/interfaces/pqr.interface';
 import { IUser } from '../../../../shared/models/interfaces/users.interface';
 import {
@@ -9,6 +9,7 @@ import {
 } from '../../../../core/mapping-objects';
 import { TimeDistancePipe } from '../../../../core/pipes/time-distance-pipe';
 import { PqrService } from '../../../../core/services/pqr.service';
+import { ToastService } from '../../../../core/services/toast.service';
 import { RouterLinkWithHref } from '@angular/router';
 
 @Component({
@@ -18,10 +19,13 @@ import { RouterLinkWithHref } from '@angular/router';
   templateUrl: './pqr-card.component.html',
 })
 export class PqrCardComponent {
+  pqrService = inject(PqrService);
+  private toastService = inject(ToastService);
+
   pqr = input.required<IPqr>();
   agents = input.required<IUser[]>();
 
-  pqrService = inject(PqrService);
+  reloadList = output<void>();
 
   priorities: PriorityControl[] = priorities;
   statuses: StatusControl[] = statuses;
@@ -59,10 +63,13 @@ export class PqrCardComponent {
         priority: this.getCurrentPriority(),
       })
       .subscribe({
-        next: (data) => {
-          console.log(data);
+        next: () => {
+          this.toastService.show('PQR actualizada correctamente.');
+          this.reloadList.emit();
         },
-        error: () => {},
+        error: () => {
+          this.toastService.show('No fue posible actualizar la PQR.', 'error');
+        },
       });
   }
 }

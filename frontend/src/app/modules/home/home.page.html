@@ -1,3 +1,75 @@
-<main>
-  <app-list></app-list>
-</main>
+@let users = rxUsers.value();
+@let pqrs = rxPqrs.value();
+
+<!-- <div class="list_head">
+  <div>
+    <p class="legend">Bandeja de entrada</p>
+    <h2>Solicitudes</h2>
+  </div>
+  <span class="result_count">{{ pqrs?.length }} resultados</span>
+</div> -->
+
+<div class="page_layout">
+  <div class="pqr_list_layout">
+    @if (isLoadingState()) {
+      <p class="loading_state">Cargando...</p>
+    }
+
+    @if (rxPqrs.error()) {
+      <p class="empty_state">Error, cargando solicitudes</p>
+    }
+
+    @if (rxPqrs.hasValue()) {
+      @for (item of pqrs; track item.id) {
+        <app-pqr-card
+          [agents]="users ?? []"
+          [pqr]="item"
+          (reloadList)="rxPqrs.reload()"
+        ></app-pqr-card>
+      }
+      @if (pqrs?.length === 0) {
+        <p class="empty_state">No hay solicitudes que coincidan con los filtros.</p>
+      }
+    }
+  </div>
+  <aside class="filters_sidebar">
+    <div class="controls">
+      <h3>Filtrar por</h3>
+      <div class="fields">
+        <span>Tipo</span>
+        <select (change)="toggleFilter($event, 'type')">
+          <option value="">Todos</option>
+          @for (item of types; track item.value) {
+            <option [value]="item.value">{{ item.label }}</option>
+          }
+        </select>
+      </div>
+      <div class="fields">
+        <span>Prioridad</span>
+        <select (change)="toggleFilter($event, 'priority')">
+          <option value="">Todas</option>
+          @for (item of priorities; track item.value) {
+            <option [value]="item.value">{{ item.label }}</option>
+          }
+        </select>
+      </div>
+      <div class="fields">
+        <span>Estado</span>
+        <select (change)="toggleFilter($event, 'status')">
+          <option value="">Todos</option>
+          @for (item of statuses; track item.value) {
+            <option [value]="item.value">{{ item.label }}</option>
+          }
+        </select>
+      </div>
+    </div>
+    <button
+      type="button"
+      class="search_button"
+      [disabled]="isLoadingState()"
+      (click)="applyFilters()"
+    >
+      {{ isLoadingState() ? 'Cargando...' : 'Buscar' }}
+    </button>
+  </aside>
+</div>
