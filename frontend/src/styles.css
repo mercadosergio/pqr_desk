@@ -12,6 +12,27 @@ body {
   height: 100%;
 }
 
+.app-snackbar-success .mdc-snackbar__surface {
+  background-color: #15803d !important;
+}
+
+.app-snackbar-error .mdc-snackbar__surface {
+  background-color: #b91c1c !important;
+}
+
+.app-snackbar-warning .mdc-snackbar__surface {
+  background-color: #a16207 !important;
+}
+
+.app-snackbar-success .mdc-snackbar__label,
+.app-snackbar-error .mdc-snackbar__label,
+.app-snackbar-warning .mdc-snackbar__label,
+.app-snackbar-success .mat-mdc-snack-bar-action,
+.app-snackbar-error .mat-mdc-snack-bar-action,
+.app-snackbar-warning .mat-mdc-snack-bar-action {
+  color: #fff;
+}
+
 a {
   text-decoration: none;
 }

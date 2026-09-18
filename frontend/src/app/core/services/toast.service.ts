@@ -1,19 +1,16 @@
-import { Injectable, Service } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { Toast } from '../../shared/models/interfaces/toast.interface';
+import { Injectable, inject } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({ providedIn: 'root' })
 export class ToastService {
-  private _toasts = new BehaviorSubject<Toast[]>([]);
-  readonly toasts$ = this._toasts.asObservable();
+  private snackBar = inject(MatSnackBar);
 
-  show(message: string, type: 'success' | 'error' | 'warning' = 'success', duration = 3000) {
-    const newToast: Toast = { id: Date.now(), message, type, duration };
-    this._toasts.next([...this._toasts.getValue(), newToast]);
-    setTimeout(() => this.remove(newToast.id), duration);
-  }
-
-  remove(id: number) {
-    this._toasts.next(this._toasts.getValue().filter((t) => t.id !== id));
+  show(message: string, type: 'success' | 'error' | 'warning' = 'success', duration = 20000) {
+    this.snackBar.open(message, 'Cerrar', {
+      duration,
+      horizontalPosition: 'left',
+      verticalPosition: 'top',
+      panelClass: [`app-snackbar-${type}`],
+    });
   }
 }

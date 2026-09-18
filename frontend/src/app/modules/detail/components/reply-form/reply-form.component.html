@@ -9,6 +9,12 @@
   ></textarea>
   <input type="text" value="email" hidden formControlName="action_type" />
   <div class="reply_footer" (click)="submit()">
-    <button class="button button_primary" type="submit">Enviar respuesta</button>
+    <button
+      class="button button_primary"
+      type="submit"
+      [disabled]="!replyForm.valid || replyForm.controls.description.value.length <= 0"
+    >
+      Enviar respuesta
+    </button>
   </div>
 </form>
