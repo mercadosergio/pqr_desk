@@ -2,9 +2,29 @@
 
 ## Descripción
 
+PQR Desk es una aplicación web para registrar, consultar y gestionar peticiones, quejas y reclamos. Está compuesta por un frontend desarrollado con Angular y una API REST desarrollada con Django REST Framework.
+
+La aplicación permite al equipo encargado:
+
+- Consultar las solicitudes registradas y filtrarlas por tipo, prioridad y estado.
+- Crear nuevas PQR con información del cliente, categoría, canal y descripción.
+- Consultar el detalle de una solicitud y la información de su cliente.
+- Actualizar la prioridad y el estado de una PQR.
+- Registrar y consultar mensajes de seguimiento de cada solicitud.
+
+### Arquitectura
+
+- **Frontend:** Angular 22.
+- **Backend:** Django 5, Django REST Framework y SQLite.
+- **Documentación de API:** Swagger UI.
+
+La documentación interactiva está disponible en:
+
+- Swagger UI: `http://127.0.0.1:4000/api/schema/swagger-ui/`
+
 ## Requisitos
 
-- Python 3.9+ (path configurado en las variables de entorno, [seguir enlace]())
+- Python 3.9+ (path configurado en las variables de entorno)
 - Node.js 22+
 
 ## Instalación
@@ -43,7 +63,12 @@ npm install
 
 ```
 
-7. Ejecutar aplicación ``ng serve`
+7. Ejecutar la aplicación frontend.
+```bash
+npm start
+```
+
+La aplicación estará disponible en `http://localhost:4200`.
 
 
 ## Autor 🖋️
