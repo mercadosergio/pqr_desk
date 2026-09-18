@@ -70,6 +70,25 @@ npm start
 
 La aplicación estará disponible en `http://localhost:4200`.
 
+## Cargar datos semilla
+
+Después de aplicar las migraciones, ejecuta desde `api`:
+
+```bash
+python manage.py seed_data
+```
+
+Con Docker Compose:
+
+```bash
+docker compose exec web python manage.py seed_data
+```
+
+El comando es idempotente: puedes ejecutarlo varias veces sin duplicar los
+usuarios, clientes, PQR ni comentarios de ejemplo. Las credenciales de prueba
+son `ana.agente@example.com` / `Agente123!` y
+`carlos.supervisor@example.com` / `Supervisor123!`.
+
 
 ## Autor 🖋️
 

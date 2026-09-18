@@ -1,4 +1,7 @@
 db.sqlite3
 venv
-__pycache__
 staticfiles
+__pycache__/
+*.pyc
+**/migrations/*.py
+!**/migrations/__init__.py

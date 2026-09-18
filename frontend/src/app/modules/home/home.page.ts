@@ -52,10 +52,6 @@ export default class HomePage {
       if (this.rxPqrs.error()) {
         this.toastService.show('No fue posible cargar las solicitudes.', 'error');
       }
-
-      if (this.rxUsers.error()) {
-        this.toastService.show('No fue posible cargar los usuarios.', 'error');
-      }
     });
   }
 
