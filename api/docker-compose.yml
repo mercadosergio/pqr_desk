@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+      - sqlite_data:/app/data  # Carpeta persistente para la base de datos SQLite
+    ports:
+      - "8000:8000"
+    environment:
+      - SQLITE_PATH=/app/data/db.sqlite3
+
+volumes:
+  sqlite_data:
