@@ -41,7 +41,7 @@
         <div class="panel_heading">
           <div>
             <p class="panel_kicker">Conversación</p>
-            <h2 id="conversation-title">Seguimiento de la solicitud</h2>
+            <h2 id="conversation-title">Mensajes de la solicitud</h2>
           </div>
           <span class="message_count">{{ comments?.length }} mensajes</span>
         </div>
@@ -60,8 +60,7 @@
       <div class="detail_page_card properties_controls">
         <div class="fields">
           <span>Prioridad</span>
-          <select (change)="toggleSelect($event, 'priority')">
-            <option value="">Todas</option>
+          <select [value]="getCurrentPriority()" (change)="onPriorityChange($event)">
             @for (item of priorities; track item.value) {
               <option [value]="item.value" [selected]="item.value === pqr.priority">
                 {{ item.label }}
@@ -71,8 +70,7 @@
         </div>
         <div class="fields">
           <span>Estado</span>
-          <select (change)="toggleSelect($event, 'status')">
-            <option value="">Todos</option>
+          <select [value]="getCurrentStatus()" (change)="changeStatus($event)">
             @for (item of statuses; track item.value) {
               <option [value]="item.value" [selected]="item.value === pqr.status">
                 {{ item.label }}

@@ -16,6 +16,7 @@ export interface IComment {
 export interface ICreateCommentDto {
   description: string;
   action_type: PqrActionType;
+  user_id?: number;
 }
 
 export interface IFormComment {

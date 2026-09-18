@@ -46,11 +46,7 @@
     <div class="field_control">
       <label for="status-{{ pqrData.id }}">Estado</label>
       <div class="select_control">
-        <select
-          id="status-{{ pqrData.id }}"
-          [value]="getCurrentStatus()"
-          (change)="changeStatus($event)"
-        >
+        <select id="status-{{ pqrData.id }}" (change)="changeStatus($event)">
           @for (item of statuses; track $index) {
             <option [value]="item.value" [selected]="item.value === pqrData.status">
               {{ item.label }}

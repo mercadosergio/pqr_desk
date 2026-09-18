@@ -16,11 +16,6 @@ import { ToastService } from '../../core/services/toast.service';
 import { PqrMessageComponent } from './components/pqr-message/pqr-message.component';
 import { CommentsService } from '../../core/services/comments.service';
 
-interface PqrChanges {
-  status?: PqrStatus;
-  priority?: PqrPriority;
-}
-
 @Component({
   imports: [
     RouterLink,
@@ -54,18 +49,23 @@ export default class DetailPage {
   priorities = priorities;
   statuses = statuses;
 
-  changes = linkedSignal<PqrChanges>(() => ({
-    status: this.rxPqr.value()?.status,
-    priority: this.rxPqr.value()?.priority,
-  }));
+  selectedPriority = linkedSignal<PqrPriority | null>(() => this.rxPqr.value()?.priority ?? null);
+  selectedStatus = linkedSignal<PqrStatus | null>(() => this.rxPqr.value()?.status ?? null);
 
-  toggleSelect(event: Event, filter: keyof PqrChanges) {
-    const value = (event.target as HTMLSelectElement).value;
+  getCurrentPriority(): PqrPriority {
+    return this.selectedPriority() ?? this.rxPqr.value()?.priority ?? 'low';
+  }
 
-    this.changes.update((prev) => ({
-      ...prev,
-      [filter]: value,
-    }));
+  getCurrentStatus(): PqrStatus {
+    return this.selectedStatus() ?? this.rxPqr.value()?.status ?? 'received';
+  }
+
+  onPriorityChange(event: Event): void {
+    this.selectedPriority.set((event.target as HTMLSelectElement).value as PqrPriority);
+  }
+
+  changeStatus(event: Event): void {
+    this.selectedStatus.set((event.target as HTMLSelectElement).value as PqrStatus);
   }
 
   updatePqr() {
@@ -75,7 +75,10 @@ export default class DetailPage {
     }
 
     this.pqrService
-      .changeStatusWithComments(this.id(), current, this.changes() as ChangeStatusDto)
+      .changeStatusWithComments(this.id(), current, {
+        status: this.getCurrentStatus(),
+        priority: this.getCurrentPriority(),
+      } as ChangeStatusDto)
       .subscribe({
         next: () => {
           this.toastService.show('PQR actualizada correctamente.');

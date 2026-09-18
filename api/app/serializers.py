@@ -40,10 +40,25 @@ class UserSerializer(serializers.ModelSerializer):
 
 class CommentSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
+    user_id = serializers.PrimaryKeyRelatedField(
+        source="user",
+        queryset=User.objects.all(),
+        write_only=True,
+        required=False,
+        allow_null=True,
+    )
 
     class Meta:
         model = Comment
-        fields = ("id", "pqr", "description", "action_type", "registered_at", "user")
+        fields = (
+            "id",
+            "pqr",
+            "description",
+            "action_type",
+            "registered_at",
+            "user",
+            "user_id",
+        )
         read_only_fields = ("id", "pqr", "registered_at", "user")
 
 

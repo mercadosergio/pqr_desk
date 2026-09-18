@@ -41,7 +41,7 @@ export class PqrService {
     return this.http.patch<IPqr>(`${this.apiUrl}/${id}/estado`, dto);
   }
 
-  changeStatusWithComments(id: number, current: IPqr, dto: ChangeStatusDto) {
+  changeStatusWithComments(id: number, current: IPqr, dto: ChangeStatusDto, userId?: number) {
     const statusLabel = statuses.find((item) => item.value === dto.status)?.label ?? dto.status;
     const priorityLabel =
       priorities.find((item) => item.value === dto.priority)?.label ?? dto.priority;
@@ -50,12 +50,14 @@ export class PqrService {
         ? this.commentsService.createComment(id, {
             description: `Estado actualizado a '${statusLabel}'.`,
             action_type: 'update',
+            ...(userId ? { user_id: userId } : {}),
           })
         : null,
       current.priority !== dto.priority
         ? this.commentsService.createComment(id, {
             description: `Prioridad actualizada a '${priorityLabel}'.`,
             action_type: 'update',
+            ...(userId ? { user_id: userId } : {}),
           })
         : null,
     ].filter((request) => request !== null);
