@@ -34,15 +34,19 @@ La aplicación permite al equipo encargado:
 ![Diagrama Entidad-Relación](/assets/flow-pqr.png)
 
 
-### Arquitectura
+## Arquitectura
 
-- **Frontend:** Angular 22.
-- **Backend:** Django 5, Django REST Framework y SQLite.
-- **Documentación de API:** Swagger UI.
+- **Frontend:** Angular 22 (Tecnología reactiva y altamente utilizada en los entornos web actuales, que permite desarrollar soluciones con una excelente optimización y rendimiento. En cuanto a la versión, se escogió la 22, porque contiene actualizaciones considerables con respecto a la reducción de código y reactividad aumentada)
+- **Backend:** Django 5, Django REST Framework (Framework que utiliza un lenguaje de alto nivel y ofrece un boostrap básico para desarrollar APIs REST escalables y robustas de manera rápida).
+- **Database:** SQLite (Motor de base de datos práctico y util para sistemas pequeños o MVP)
 
 La documentación interactiva está disponible en:
 
 - Swagger UI: `http://127.0.0.1:8000/api/schema/swagger-ui/`
+
+## Colección de Postman
+Puede encontrar la coleccción de postman exportada en la ruta ``/postman/PQR-API.postman_collection.json`` del directorio raíz del repositorio
+
 
 ## Capturas de la aplicación
 
