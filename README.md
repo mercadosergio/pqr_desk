@@ -27,6 +27,13 @@ La aplicación permite al equipo encargado:
 | 7   | Como supervisor quiero ver estadísticas básicas de PQR por estado y por tipo, para monitorear la carga y el desempeño del equipo                                       | Supervisor/Admin | Media     |
 | 8   | Como admin quiero gestionar los usuarios/agentes y sus roles (agente/supervisor/admin), para controlar el acceso al sistema                                            | Admin            | Media     |
 
+## Diagrama Entidad-Relación
+![Diagrama Entidad-Relación](/assets/ER-PQRDESK.png)
+
+## Diagrama de flujo
+![Diagrama Entidad-Relación](/assets/flow-pqr.png)
+
+
 ### Arquitectura
 
 - **Frontend:** Angular 22.
@@ -35,7 +42,7 @@ La aplicación permite al equipo encargado:
 
 La documentación interactiva está disponible en:
 
-- Swagger UI: `http://127.0.0.1:4000/api/schema/swagger-ui/`
+- Swagger UI: `http://127.0.0.1:8000/api/schema/swagger-ui/`
 
 ## Capturas de la aplicación
 
