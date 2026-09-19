@@ -99,7 +99,7 @@ python manage.py runserver 8000
 
 ```
 
-6. Ubicarse en la carpeta raíz del frontend e instalar dependencias.
+6. Abrir otra terminal en el repositorio local y ubicarse en la carpeta raíz del frontend e instalar dependencias.
 ```bash
 cd frontend
 npm install
