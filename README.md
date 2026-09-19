@@ -33,6 +33,9 @@ La aplicación permite al equipo encargado:
 ## Diagrama de flujo
 ![Diagrama Entidad-Relación](/assets/flow-pqr.png)
 
+## Tablero Kanban
+Puede ver el tablero Kanban en Trello haciendo clic [aquí](https://trello.com/invite/b/6aa995020c26a7fef93bed2e/ATTI2060c7d0796b3677a5ec4193facf8863B51CA144/pqr-app)
+
 
 ## Arquitectura
 
