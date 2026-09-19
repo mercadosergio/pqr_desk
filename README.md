@@ -16,16 +16,16 @@ La aplicación permite al equipo encargado:
 > Nota: Aunque no posee un sistema de autenticación, este MVP muestra el flujo de solicitud y atención de PQRs desde los distintos roles propuestos. 
 
 ## Historias de usuario
-| #   | Historia de usuario                                                                                                                                                    | Actor            | Prioridad |
-| --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- | --------- |
-| 1   | Como cliente necesito registrar y enciar una PQR para dejar constancia formal de mi solicitud                                                                          | Ciudadano        | Alta      |
-| 2   | Como cliente quiero consultar el estado de mi PQR usando su número de radicado                                                                                         | Ciudadano        | Alta      |
-| 3   | Como usuario del sistema/agente necesito listar las PQR filtrando por tipo, estado, prioridad y categoría, para priorizar mi carga de trabajo                          | Agente           | Alta      |
-| 4   | Como usuario del sistema/agente quiero ver el detalle completo de una PQR junto con su historial de seguimiento, para entender el contexto antes de actuar             | Agente           | Alta      |
-| 5   | Como usuario del sistema/agente quiero cambiar el estado y la prioridad de una PQR, para reflejar el avance real de la gestión                                         | Agente           | Alta      |
-| 6   | Como usuario del sistema/agente quiero agregar entradas de seguimiento o comentarios internos a una PQR, para documentar las acciones realizadas sin alterar su estado | Agente           | Alta      |
-| 7   | Como supervisor quiero ver estadísticas básicas de PQR por estado y por tipo, para monitorear la carga y el desempeño del equipo                                       | Supervisor/Admin | Media     |
-| 8   | Como admin quiero gestionar los usuarios/agentes y sus roles (agente/supervisor/admin), para controlar el acceso al sistema                                            | Admin            | Media     |
+| #   | Historia de usuario                                                                                                                                                    | Actor             | Prioridad |
+| --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- | --------- |
+| 1   | Como cliente necesito registrar y enciar una PQR para dejar constancia formal de mi solicitud                                                                          | Ciudadano/Cliente | Alta      |
+| 2   | Como cliente quiero consultar el estado de mi PQR usando su número de radicado                                                                                         | Ciudadano/Cliente | Alta      |
+| 3   | Como usuario del sistema/agente necesito listar las PQR filtrando por tipo, estado, prioridad y categoría, para priorizar mi carga de trabajo                          | Agente            | Alta      |
+| 4   | Como usuario del sistema/agente quiero ver el detalle completo de una PQR junto con su historial de seguimiento, para entender el contexto antes de actuar             | Agente            | Alta      |
+| 5   | Como usuario del sistema/agente quiero cambiar el estado y la prioridad de una PQR, para reflejar el avance real de la gestión                                         | Agente            | Alta      |
+| 6   | Como usuario del sistema/agente quiero agregar entradas de seguimiento o comentarios internos a una PQR, para documentar las acciones realizadas sin alterar su estado | Agente            | Alta      |
+| 7   | Como supervisor quiero ver estadísticas básicas de PQR por estado y por tipo, para monitorear la carga y el desempeño del equipo                                       | Supervisor/Admin  | Media     |
+| 8   | Como admin quiero gestionar los usuarios/agentes y sus roles (agente/supervisor/admin), para controlar el acceso al sistema                                            | Admin             | Media     |
 
 ## Diagrama Entidad-Relación
 ![Diagrama Entidad-Relación](/assets/ER-PQRDESK.png)
