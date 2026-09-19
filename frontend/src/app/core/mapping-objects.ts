@@ -13,7 +13,7 @@ export interface PriorityControl {
 
 export const priorities: PriorityControl[] = [
   { label: 'Baja', value: 'low', color: '#2e7d32' },
-  { label: 'Media', value: 'medium', color: '#b7791f' },
+  { label: 'Media', value: 'medium', color: '#d5b130' },
   { label: 'Alta', value: 'high', color: '#c2410c' },
   { label: 'Urgente', value: 'urgent', color: '#b91c1c' },
 ];
@@ -24,9 +24,9 @@ export interface StatusControl {
 }
 
 export const statuses: StatusControl[] = [
-  { label: 'Cerrada', value: 'closed' },
-  { label: 'En gestión', value: 'in_progress' },
   { label: 'Recibida', value: 'received' },
+  { label: 'En gestión', value: 'in_progress' },
+  { label: 'Cerrada', value: 'closed' },
   { label: 'Resuelta', value: 'resolved' },
 ];
 

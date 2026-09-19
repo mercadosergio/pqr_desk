@@ -128,13 +128,12 @@
         <div class="side_heading">
           <div>
             <p class="panel_kicker">Historial</p>
-            <h2 id="updates-title">Seguimiento de cambios</h2>
+            <h2 id="updates-title">Seguimiento</h2>
           </div>
-          <span class="message_count">{{ rxTracks.value()?.length ?? 0 }}</span>
         </div>
 
         @if (rxTracks.isLoading()) {
-          <p class="update_state">Cargando cambios...</p>
+          <p class="update_state">Cargando...</p>
         } @else if (rxTracks.error()) {
           <p class="update_state update_state--error">No fue posible cargar el seguimiento.</p>
         } @else if (rxTracks.hasValue() && rxTracks.value()?.length === 0) {
