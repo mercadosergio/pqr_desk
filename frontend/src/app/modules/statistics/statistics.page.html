@@ -1,0 +1,83 @@
+<section class="statistics_page">
+  <header class="page_heading">
+    <div>
+      <p class="eyebrow">Visión general</p>
+      <h1>Dashboard</h1>
+    </div>
+  </header>
+
+  @if (rxPqrs.isLoading() || rxUsers.isLoading() || rxClients.isLoading()) {
+    <p class="state_message">Cargando estadísticas...</p>
+  } @else if (rxPqrs.error() || rxUsers.error() || rxClients.error()) {
+    <p class="state_message state_message--error">No fue posible cargar las estadísticas.</p>
+  } @else if (rxPqrs.hasValue() && rxUsers.hasValue() && rxClients.hasValue()) {
+    <div class="summary_grid">
+      <article class="summary_card summary_card--users">
+        <span class="summary_label">Usuarios</span>
+        <strong>{{ totalUsers() }}</strong>
+        <span class="summary_hint">Perfiles registrados</span>
+      </article>
+      <article class="summary_card summary_card--clients">
+        <span class="summary_label">Clientes</span>
+        <strong>{{ totalClients() }}</strong>
+      </article>
+      <article class="summary_card summary_card--pqrs">
+        <span class="summary_label">Peticiones, Queja y Reclamos</span>
+        <strong>{{ total() }}</strong>
+        <span class="summary_hint">Solicitudes registradas</span>
+      </article>
+    </div>
+
+    <div class="stats_grid">
+      <section class="stats_panel" aria-labelledby="status-title">
+        <div class="panel_heading">
+          <div>
+            <p class="panel_kicker">Seguimiento</p>
+            <h2 id="status-title">PQR por estado</h2>
+          </div>
+          <span>{{ total() }} total</span>
+        </div>
+
+        <div class="stat_list">
+          @for (item of statusStats(); track item.value) {
+            <div class="stat_row">
+              <div class="stat_row__labels">
+                <span>{{ item.label }}</span>
+                <strong>{{ item.count }}</strong>
+              </div>
+              <div class="bar_track" aria-hidden="true">
+                <div class="bar_fill bar_fill--status" [style.width.%]="item.percent"></div>
+              </div>
+              <span class="stat_percent">{{ item.percent }}%</span>
+            </div>
+          }
+        </div>
+      </section>
+
+      <section class="stats_panel" aria-labelledby="type-title">
+        <div class="panel_heading">
+          <div>
+            <p class="panel_kicker">Clasificación</p>
+            <h2 id="type-title">PQR por tipo</h2>
+          </div>
+          <span>{{ total() }} total</span>
+        </div>
+
+        <div class="stat_list">
+          @for (item of typeStats(); track item.value) {
+            <div class="stat_row">
+              <div class="stat_row__labels">
+                <span>{{ item.label }}</span>
+                <strong>{{ item.count }}</strong>
+              </div>
+              <div class="bar_track" aria-hidden="true">
+                <div class="bar_fill bar_fill--type" [style.width.%]="item.percent"></div>
+              </div>
+              <span class="stat_percent">{{ item.percent }}%</span>
+            </div>
+          }
+        </div>
+      </section>
+    </div>
+  }
+</section>

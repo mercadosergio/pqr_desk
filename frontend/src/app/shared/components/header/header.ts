@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faClipboardList, faHouse, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faChartSimple, faClipboardList, faHouse, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   imports: [RouterLink, RouterLinkActive, FontAwesomeModule],
@@ -13,4 +13,5 @@ export class Header {
   readonly homeIcon = faHouse;
   readonly listIcon = faClipboardList;
   readonly newPqrIcon = faPlus;
+  readonly statisticsIcon = faChartSimple;
 }

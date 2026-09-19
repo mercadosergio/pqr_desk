@@ -10,6 +10,10 @@ export const routes: Routes = [
     loadComponent: () => import('./modules/pqr-form/pqr-form.page'),
   },
   {
+    path: 'estadisticas',
+    loadComponent: () => import('./modules/statistics/statistics.page'),
+  },
+  {
     path: 'pqr/:id',
     loadComponent: () => import('./modules/detail/detail.page'),
   },
