@@ -12,6 +12,21 @@ La aplicación permite al equipo encargado:
 - Actualizar la prioridad y el estado de una PQR.
 - Registrar y consultar mensajes de seguimiento de cada solicitud.
 
+
+> Nota: Aunque no posee un sistema de autenticación, este MVP muestra el flujo de solicitud y atención de PQRs desde los distintos roles propuestos. 
+
+## Historias de usuario
+| #   | Historia de usuario                                                                                                                                                    | Actor            | Prioridad |
+| --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- | --------- |
+| 1   | Como cliente necesito registrar y enciar una PQR para dejar constancia formal de mi solicitud                                                                          | Ciudadano        | Alta      |
+| 2   | Como cliente quiero consultar el estado de mi PQR usando su número de radicado                                                                                         | Ciudadano        | Alta      |
+| 3   | Como usuario del sistema/agente necesito listar las PQR filtrando por tipo, estado, prioridad y categoría, para priorizar mi carga de trabajo                          | Agente           | Alta      |
+| 4   | Como usuario del sistema/agente quiero ver el detalle completo de una PQR junto con su historial de seguimiento, para entender el contexto antes de actuar             | Agente           | Alta      |
+| 5   | Como usuario del sistema/agente quiero cambiar el estado y la prioridad de una PQR, para reflejar el avance real de la gestión                                         | Agente           | Alta      |
+| 6   | Como usuario del sistema/agente quiero agregar entradas de seguimiento o comentarios internos a una PQR, para documentar las acciones realizadas sin alterar su estado | Agente           | Alta      |
+| 7   | Como supervisor quiero ver estadísticas básicas de PQR por estado y por tipo, para monitorear la carga y el desempeño del equipo                                       | Supervisor/Admin | Media     |
+| 8   | Como admin quiero gestionar los usuarios/agentes y sus roles (agente/supervisor/admin), para controlar el acceso al sistema                                            | Admin            | Media     |
+
 ### Arquitectura
 
 - **Frontend:** Angular 22.
@@ -21,6 +36,20 @@ La aplicación permite al equipo encargado:
 La documentación interactiva está disponible en:
 
 - Swagger UI: `http://127.0.0.1:4000/api/schema/swagger-ui/`
+
+## Capturas de la aplicación
+
+### Home
+![Home](/assets/pqr-desk-home.png)
+
+### Detalle
+![Detalle](/assets/pqr-desk-detail.png)
+
+### Formulario de registro
+![Formulario de registro](/assets/pqr-desk-form.png)
+
+### Dashboard
+![Dashboard](/assets/pqr-desk-dashboard.png)
 
 ## Requisitos
 
@@ -50,9 +79,9 @@ python manage.py migrate
 
 ```
 
-5. Ejecutar API y desplegarla en el puerto 4000.
+5. Ejecutar API y desplegarla en el puerto 8000.
 ```bash
-python manage.py runserver 4000
+python manage.py runserver 8000
 
 ```
 
@@ -70,25 +99,27 @@ npm start
 
 La aplicación estará disponible en `http://localhost:4200`.
 
-## Cargar datos semilla
 
-Después de aplicar las migraciones, ejecuta desde `api`:
+## Pasos para iniciar con Docker
 
+1. En la terminal, ubicarse en la carpeta raíz del backend `cd api`, y levantar el contenedor.
 ```bash
-python manage.py seed_data
+docker compose up -d --build
+
 ```
 
-Con Docker Compose:
-
+2. Crear y realizar migraciones a la base de datos
 ```bash
-docker compose exec web python manage.py seed_data
+docker compose exec web python manage.py makemigrations
+docker compose exec web python manage.py migrate
+
 ```
 
-El comando es idempotente: puedes ejecutarlo varias veces sin duplicar los
-usuarios, clientes, PQR ni comentarios de ejemplo. Las credenciales de prueba
-son `ana.agente@example.com` / `Agente123!` y
-`carlos.supervisor@example.com` / `Supervisor123!`.
+3. Guardar datos semilla (seeders), que posteriormente se usaran como demostración
 
+```bash
+docker compose exec web python manage.py seed
+```
 
 ## Autor 🖋️
 

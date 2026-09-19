@@ -124,6 +124,37 @@
           </div>
         </dl>
       </div>
+      <section class="side_card update_card" aria-labelledby="updates-title">
+        <div class="side_heading">
+          <div>
+            <p class="panel_kicker">Historial</p>
+            <h2 id="updates-title">Seguimiento de cambios</h2>
+          </div>
+          <span class="message_count">{{ rxTracks.value()?.length ?? 0 }}</span>
+        </div>
+
+        @if (rxTracks.isLoading()) {
+          <p class="update_state">Cargando cambios...</p>
+        } @else if (rxTracks.error()) {
+          <p class="update_state update_state--error">No fue posible cargar el seguimiento.</p>
+        } @else if (rxTracks.hasValue() && rxTracks.value()?.length === 0) {
+          <p class="update_state">Aún no hay cambios registrados.</p>
+        } @else {
+          <div class="update_list">
+            @for (item of rxTracks.value(); track item.id) {
+              <article class="update_item">
+                <span class="update_marker" aria-hidden="true"></span>
+                <div>
+                  <p>{{ item.description }}</p>
+                  <small>
+                    {{ item.registered_at | timeDistance }}
+                  </small>
+                </div>
+              </article>
+            }
+          </div>
+        }
+      </section>
     </aside>
   </div>
 }

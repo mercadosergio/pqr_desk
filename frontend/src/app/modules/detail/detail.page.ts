@@ -46,6 +46,11 @@ export default class DetailPage {
     stream: ({ params }) => this.commentsService.getCommentsByPqr(params, 'message'),
   });
 
+  rxTracks = rxResource({
+    params: () => this.id(),
+    stream: ({ params }) => this.commentsService.getCommentsByPqr(params, 'update'),
+  });
+
   priorities = priorities;
   statuses = statuses;
 
@@ -83,6 +88,7 @@ export default class DetailPage {
         next: () => {
           this.toastService.show('PQR actualizada correctamente.');
           this.rxPqr.reload();
+          this.rxTracks.reload();
         },
         error: () => {
           this.toastService.show('No fue posible actualizar la PQR.', 'error');
