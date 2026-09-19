@@ -16,7 +16,7 @@ import { ToastService } from '../../../../core/services/toast.service';
 })
 export class ReplyFormComponent {
   pqr = input.required<IPqr>();
-  userId = input<number>();
+  userId = 1; // Ana Agente
   reloadDetail = output<void>();
 
   private fb = inject(FormBuilder);
@@ -59,7 +59,7 @@ export class ReplyFormComponent {
     return {
       description: this.replyForm.controls.description.value,
       action_type: this.replyForm.controls.action_type.value,
-      ...(this.userId() ? { user_id: this.userId() } : {}),
+      ...(this.userId ? { user_id: this.userId } : {}),
     };
   }
 }

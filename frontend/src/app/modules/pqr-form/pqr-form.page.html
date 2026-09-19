@@ -32,22 +32,7 @@
           }
         </select>
       </div>
-      <div class="form_field">
-        <label for="priority">Prioridad:</label>
-        <select id="priority" formControlName="priority">
-          @for (item of priorities; track item.value) {
-            <option [value]="item.value">{{ item.label }}</option>
-          }
-        </select>
-      </div>
-      <div class="form_field">
-        <label for="status">Estado:</label>
-        <select id="status" formControlName="status">
-          @for (item of statuses; track item.value) {
-            <option [value]="item.value">{{ item.label }}</option>
-          }
-        </select>
-      </div>
+
       <div class="form_field">
         <label for="channel">Canal:</label>
         <select id="channel" formControlName="channel">
@@ -57,7 +42,7 @@
         </select>
       </div>
       <div class="form_actions form_field_full">
-        <button class="submit_button" type="submit">Crear PQR</button>
+        <button class="submit_button" type="submit">Enviar PQR</button>
       </div>
     </form>
   </div>
